@@ -180,12 +180,12 @@ All possible subprotocol names following the format "webtransport_VERSION," wher
 
 ## WebTransport WebSocket Protocol Version Registry
 
-This specification establishes a new IANA registry for WebTransort Protocol Version names, intended for use with the WebSocket WebTransport Protocol, in alignment with the principles outlined in {{RFC5226}}.
+This specification establishes a new IANA registry for WebTransort Protocol Version names, intended for use with the WebSocket WebTransport Protocol, in alignment with the principles outlined in {{!RFC5226}}.
 
 As part of this registry, IANA manages the following information (similar to {{WEBSOCKET}} versions):
 
    Version String
-      The version string name as part of the subprotocol defined in {{websocket_subprotocol_name_registry}} and {{connection_and_version_negotiation}}.  The value must only include alphanumeric characters.
+      The version string name as part of the subprotocol defined in {{websocket-subprotocol-name-registry}} and {{connection-and-version-negotiation}}.  The value must only include alphanumeric characters.
 
    Reference
       The RFC requesting a new version number or a draft name with
@@ -196,10 +196,10 @@ As part of this registry, IANA manages the following information (similar to {{W
 
   A version string can be either "Interim" or "Standard".
 
-  A "Standard" version string is part of an RFC and identifies a major, stable version of the WebTransport-WebSocket protocol. The "IETF Review" IANA registration policy {{RFC5226}} applies to "Standard" version string.
+  A "Standard" version string is part of an RFC and identifies a major, stable version of the WebTransport-WebSocket protocol. The "IETF Review" IANA registration policy {{!RFC5226}} applies to "Standard" version string.
 
   An Internet-Draft documents an "Interim" version string. Internet-Drafts helps implementors to identify and interoperate with the WebTransport-WebSocket protocol,
-  as this current draft. The "Expert Review" IANA registration policy {{RFC5226}} applies to the "Interim" version names. The initial Designated Experts need to be determined.
+  as this current draft. The "Expert Review" IANA registration policy {{!RFC5226}} applies to the "Interim" version names. The initial Designated Experts need to be determined.
 
 --- back
 
