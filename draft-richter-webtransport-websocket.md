@@ -44,7 +44,7 @@ keyword:
 author:
  -
     fullname: Marten Richter
-    organization: Technische Universität Berlin, Institut für Theoretische Physik
+    organization: Technische Universität Berlin
     email: marten.richter@tu-berlin.de
 
 normative:
@@ -59,13 +59,12 @@ normative:
 
 informative:
   DATAGRAM: RFC9221
-  RFC5226: RFC5226
 
 
 --- abstract
 
-WebTransport {{!OVERVIEW}}, a protocol framework within the Web security model, empowers Web clients to initiate secure multiplexed transport for low-level client-server interactions with remote servers.
-This document outlines a protocol, based on WebSocket {{!WEBSOCKET}}, offering WebTransport capabilities similar to the HTTP/2 variant {{!WEBTRANSPORT-H2}}. It serves as an alternative when UDP-based protocols are inaccessible, and the client environment exclusively supports WebSocket {{WEBSOCKET}}.
+WebTransport {{OVERVIEW}}, a protocol framework within the Web security model, empowers Web clients to initiate secure multiplexed transport for low-level client-server interactions with remote servers.
+This document outlines a protocol, based on WebSocket {{WEBSOCKET}}, offering WebTransport capabilities similar to the HTTP/2 variant {{WEBTRANSPORT-H2}}. It serves as an alternative when UDP-based protocols are inaccessible, and the client environment exclusively supports WebSocket {{WEBSOCKET}}.
 ***DISCLAIMER: So far this document was not submitted to any IETF WG. Currently, it just describes the protocol used for WebSocket connections of the @fails-components/webtransport package.***
 
 --- middle
@@ -74,7 +73,7 @@ This document outlines a protocol, based on WebSocket {{!WEBSOCKET}}, offering W
 
 WebTransport {{OVERVIEW}} is designed to facilitate communication for Web clients over HTTP/3 {{?HTTP3=I-D.ietf-quic-http}}, leveraging QUIC {{?QUIC=RFC9000}} semantics with streams or datagrams {{DATAGRAM}}. In cases where UDP-based traffic is restricted, HTTP/2 protocol {{WEBTRANSPORT-H2}} serves as an alternative built solely on HTTP semantics.
 
-Both {{WEBTRANSPORT-H2}} and {{!WEBTRANSPORT-H3}} variants require a native WebClient implementation due to the usual unavailability of plain UDP and TCP/IP socket access for scripts within WebClients
+Both {{WEBTRANSPORT-H2}} and {{WEBTRANSPORT-H3}} variants require a native WebClient implementation due to the usual unavailability of plain UDP and TCP/IP socket access for scripts within WebClients
 
 This document defines a protocol implementable on the WebClient using available scripting languages, without altering the WebClient's native code.
 It uses the widespread WebSocket protocol as the base without modification.
@@ -200,7 +199,7 @@ As part of this registry, IANA manages the following information (similar to {{W
   A "Standard" version string is part of an RFC and identifies a major, stable version of the WebTransport-WebSocket protocol. The "IETF Review" IANA registration policy {{RFC5226}} applies to "Standard" version string.
 
   An Internet-Draft documents an "Interim" version string. Internet-Drafts helps implementors to identify and interoperate with the WebTransport-WebSocket protocol,
-  as this current draft. The "Expert Review" IANA registration policy {{!RFC5226}} applies to the "Interim" version names. The initial Designated Experts need to be determined.
+  as this current draft. The "Expert Review" IANA registration policy {{RFC5226}} applies to the "Interim" version names. The initial Designated Experts need to be determined.
 
 --- back
 
