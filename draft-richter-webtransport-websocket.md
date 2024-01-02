@@ -156,7 +156,7 @@ as no Extension Data is allowed.
 
 ## Replacement for SETTINGS
 
-{{Section 3.1 of WEBTRANSPORT-H2}} requires sending an SETTINGS_WEBTRANSPORT_MAX_SESSIONS settings parameter. This is not required here, as the protocol type is negotiated using the 
+{{Section 3.1 of WEBTRANSPORT-H2}} requires sending an SETTINGS_WEBTRANSPORT_MAX_SESSIONS settings parameter. This is not required here, as the protocol type is negotiated using the
 subprotocol mechanism of WebSockets and SETTINGS_WEBTRANSPORT_MAX_SESSIONS equal to 1
 is assumed per WebSocket connection(HTTP1)/stream(HTTP2).
 Subsections of {{Section 3.4 of WEBTRANSPORT-H2}} require sending initial SETTINGS for
