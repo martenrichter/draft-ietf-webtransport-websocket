@@ -59,12 +59,13 @@ normative:
 
 informative:
   DATAGRAM: RFC9221
+  RFC5226: RFC5226
 
 
 --- abstract
 
-WebTransport {{OVERVIEW}}, a protocol framework within the Web security model, empowers Web clients to initiate secure multiplexed transport for low-level client-server interactions with remote servers.
-This document outlines a protocol, based on WebSocket {{WEBSOCKET}}, offering WebTransport capabilities similar to the HTTP/2 variant {{WEBTRANSPORT-H2}}. It serves as an alternative when UDP-based protocols are inaccessible, and the client environment exclusively supports WebSocket {{WEBSOCKET}}.
+WebTransport {{!OVERVIEW}}, a protocol framework within the Web security model, empowers Web clients to initiate secure multiplexed transport for low-level client-server interactions with remote servers.
+This document outlines a protocol, based on WebSocket {{!WEBSOCKET}}, offering WebTransport capabilities similar to the HTTP/2 variant {{!WEBTRANSPORT-H2}}. It serves as an alternative when UDP-based protocols are inaccessible, and the client environment exclusively supports WebSocket {{WEBSOCKET}}.
 ***DISCLAIMER: So far this document was not submitted to any IETF WG. Currently, it just describes the protocol used for WebSocket connections of the @fails-components/webtransport package.***
 
 --- middle
@@ -73,7 +74,7 @@ This document outlines a protocol, based on WebSocket {{WEBSOCKET}}, offering We
 
 WebTransport {{OVERVIEW}} is designed to facilitate communication for Web clients over HTTP/3 {{?HTTP3=I-D.ietf-quic-http}}, leveraging QUIC {{?QUIC=RFC9000}} semantics with streams or datagrams {{DATAGRAM}}. In cases where UDP-based traffic is restricted, HTTP/2 protocol {{WEBTRANSPORT-H2}} serves as an alternative built solely on HTTP semantics.
 
-Both {{WEBTRANSPORT-H2}} and {{WEBTRANSPORT-H3}} variants require a native WebClient implementation due to the usual unavailability of plain UDP and TCP/IP socket access for scripts within WebClients
+Both {{WEBTRANSPORT-H2}} and {{!WEBTRANSPORT-H3}} variants require a native WebClient implementation due to the usual unavailability of plain UDP and TCP/IP socket access for scripts within WebClients
 
 This document defines a protocol implementable on the WebClient using available scripting languages, without altering the WebClient's native code.
 It uses the widespread WebSocket protocol as the base without modification.
@@ -111,12 +112,12 @@ PING and PONG frame handling is not changed {{Section 5.5 of WEBSOCKET}}.
 The CLOSE frame {{Section 5.5.1 of WEBSOCKET}} replaces the mechanism invoked after CONNECT stream closure in {{Section 2 of WEBTRANSPORT-H2}}.
 The body MUST include a UTF-8 encoded reason string when transmitted by a protocol-aware client or server.
 The reason string has the form "CODE:REASONSTRING", where CODE is a text representation of an unsigned 32-bit decimal integer in the range of between 0x00000000 and
-0xffffffff {{ 4.3 of WEBTRANSPORT-H3}}. REASONSTRING is the actual reason transmitted
+0xffffffff {{Section 4.3 of WEBTRANSPORT-H3}}. REASONSTRING is the actual reason transmitted
 through WebTransport.
 A close FRAME without a reason may be sent by protocol-unaware WebClients or proxies. In such instances, the CODE and REASONSTRING are reconstructed using the WebSocket Close Code Number as specified in the WebSocketCloseCode Registry outlined in {{Section 11.7 of WEBSOCKET}}.
 
 Data Frames containing Text are reserved for future use and MUST NOT be sent.
-Binary Data Frames transport CAPSULE content defined in {{WEBTRANSPORT-H2}} and {{DATAGRAM}}. For details, refer to the next [section] (#capsule-frames). Their length is limited by WebTransport flow control, and a violation SHOULD lead to connection termination.
+Binary Data Frames transport CAPSULE content defined in {{WEBTRANSPORT-H2}} and {{DATAGRAM}}. For details, refer to the next section {{#capsule-frames}}. Their length is limited by WebTransport flow control, and a violation SHOULD lead to connection termination.
 CONTINUATION frames are processed per {{WEBSOCKET}} specifications. Given the streaming nature of the content, partial DATA frames or CONTINUATION frames should be promptly forwarded to corresponding streams reducing latency.
 
 ## Capsule frames
@@ -161,7 +162,7 @@ as no Extension Data is allowed.
 {{Section 3.1 WEBTRANSPORT-H2}} requires sending an SETTINGS_WEBTRANSPORT_MAX_SESSIONS settings parameter. This is not required here, as the protocol type is negotiated using the 
 subprotocol mechanism of WebSockets and SETTINGS_WEBTRANSPORT_MAX_SESSIONS equal to 1
 is assumed per WebSocket connection(HTTP1)/stream(HTTP2).
-{{ Subsections of Section 3.4 WEBTRANSPORT-H2}} requires sending initial SETTINGS for
+Subsections of {{Section 3.4 WEBTRANSPORT-H2}} require sending initial SETTINGS for
 flow control. As SETTINGS are not accessible for the WebSocket protocol using the existing WebSocket interfaces, a replacement is required.
 
 Therefore client and server MUST send the initial flow control values using CAPSULES
@@ -180,12 +181,12 @@ All possible subprotocol names following the format "webtransport_VERSION," wher
 
 ## WebTransport WebSocket Protocol Version Registry
 
-This specification establishes a new IANA registry for WebTransort Protocol Version names, intended for use with the WebSocket WebTransport Protocol, in alignment with the principles outlined in RFC 5226 [RFC5226].
+This specification establishes a new IANA registry for WebTransort Protocol Version names, intended for use with the WebSocket WebTransport Protocol, in alignment with the principles outlined in {{RFC5226}}.
 
-As part of this registry, IANA manages the following information (similar to [WEBSOCKET] versions):
+As part of this registry, IANA manages the following information (similar to {{WEBSOCKET}} versions):
 
    Version String
-      The version string name as part of the subprotocol defined in [the previous section](#websocket_subprotocol_name_registry) and the [Connection and version negotiation](#connection_and_version_negotiation).  The value must only include alphanumeric characters.
+      The version string name as part of the subprotocol defined in {{#websocket_subprotocol_name_registry}} and {{#connection_and_version_negotiation}}.  The value must only include alphanumeric characters.
 
    Reference
       The RFC requesting a new version number or a draft name with
@@ -196,10 +197,10 @@ As part of this registry, IANA manages the following information (similar to [WE
 
   A version string can be either "Interim" or "Standard".
 
-  A "Standard" version string is part of an RFC and identifies a major, stable version of the WebTransport-WebSocket protocol. The "IETF Review" IANA registration policy [RFC5226] applies to "Standard" version string.
+  A "Standard" version string is part of an RFC and identifies a major, stable version of the WebTransport-WebSocket protocol. The "IETF Review" IANA registration policy {{RFC5226}} applies to "Standard" version string.
 
   An Internet-Draft documents an "Interim" version string. Internet-Drafts helps implementors to identify and interoperate with the WebTransport-WebSocket protocol,
-  as this current draft. The "Expert Review" IANA registration policy [RFC5226] applies to the "Interim" version names. The initial Designated Experts need to be determined.
+  as this current draft. The "Expert Review" IANA registration policy {{!RFC5226}} applies to the "Interim" version names. The initial Designated Experts need to be determined.
 
 --- back
 
