@@ -59,7 +59,6 @@ normative:
 
 informative:
   DATAGRAM: RFC9221
-  RFC5226
 
 
 --- abstract
