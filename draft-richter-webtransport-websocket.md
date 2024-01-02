@@ -44,7 +44,7 @@ keyword:
 author:
  -
     fullname: Marten Richter
-    organization: Technische Universität Berlin
+    organization: Technische Universität Berlin, Institut für Theoretische Physik
     email: marten.richter@tu-berlin.de
 
 normative:
