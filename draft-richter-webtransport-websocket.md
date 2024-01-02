@@ -52,8 +52,6 @@ normative:
   WEBTRANSPORT-H3: I-D.ietf-webtrans-http3
   WEBTRANSPORT-H2: I-D.ietf-webtrans-http2
   HTTP: I-D.ietf-httpbis-semantics
-  HTTP-DATAGRAM: RFC9297
-  HTTP2: RFC9113
   WEBSOCKET: RFC6455
   WEBSOCKET-H2: RFC8441
 
