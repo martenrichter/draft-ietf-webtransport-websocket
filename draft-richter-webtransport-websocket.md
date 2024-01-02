@@ -101,6 +101,7 @@ CONTINUATION frames are processed per {{WEBSOCKET}} specifications. Given the st
 This protocol adopts the mechanisms and intrinsic elements outlined in {{WEBTRANSPORT-H2}}, which itself is constructed upon the CAPSULE protocol originating from {{DATAGRAM}}.
 
 A CAPSULE has the form in {{DATAGRAM}}:
+
 ~~~
 Capsule {
   Capsule Type (i),
@@ -112,6 +113,7 @@ where Capsule Type and Length are variable-length integers.
 The Capsule Value represents the payload of the capsule, and its semantics are determined by the payload type
 
 In the context of WebTransport over WebSockets, CAPSULEs are substituted by binary DATA FRAMES of WebSockets, following the format:
+
 ~~~
 WebSocketDataFrameCapsule {
   FrameHeader (..),
@@ -120,6 +122,7 @@ WebSocketDataFrameCapsule {
 ~~~
 FrameHeader contains the first two bytes of the FRAME, and if present the extended payload length and masking key as defined in {{Section 5.2 of WEBSOCKET}}.
 PayloadData is defined as:
+
 ~~~
 PayloadData {
   Capsule Type (i),
