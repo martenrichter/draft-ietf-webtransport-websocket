@@ -9,8 +9,8 @@ number:
 date: {DATE}
 consensus: true
 v: 3
-area: art
-workgroup: webtrans
+# area: art
+# workgroup: webtrans
 keyword:
  - Internet-Draft
 #venue:
