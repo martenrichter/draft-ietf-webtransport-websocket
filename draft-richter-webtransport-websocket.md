@@ -59,6 +59,7 @@ normative:
 
 informative:
   DATAGRAM: RFC9221
+  RFC5226
 
 
 --- abstract
@@ -116,38 +117,38 @@ through WebTransport.
 A close FRAME without a reason may be sent by protocol-unaware WebClients or proxies. In such instances, the CODE and REASONSTRING are reconstructed using the WebSocket Close Code Number as specified in the WebSocketCloseCode Registry outlined in {{Section 11.7 of WEBSOCKET}}.
 
 Data Frames containing Text are reserved for future use and MUST NOT be sent.
-Binary Data Frames transport CAPSULE content defined in {{WEBTRANSPORT-H2}} and {{DATAGRAM}}. For details, refer to the next section {{#capsule-frames}}. Their length is limited by WebTransport flow control, and a violation SHOULD lead to connection termination.
+Binary Data Frames transport CAPSULE content defined in {{WEBTRANSPORT-H2}} and {{DATAGRAM}}. For details, refer to the next section {{capsule-frames}}. Their length is limited by WebTransport flow control, and a violation SHOULD lead to connection termination.
 CONTINUATION frames are processed per {{WEBSOCKET}} specifications. Given the streaming nature of the content, partial DATA frames or CONTINUATION frames should be promptly forwarded to corresponding streams reducing latency.
 
 ## Capsule frames
 This protocol adopts the mechanisms and intrinsic elements outlined in {{WEBTRANSPORT-H2}}, which itself is constructed upon the CAPSULE protocol originating from {{DATAGRAM}}.
 
 A CAPSULE has the form in {{DATAGRAM}}:
-```
+~~~
 Capsule {
   Capsule Type (i),
   Capsule Length (i),
   Capsule Value (..),
 }
-```
+~~~
 where Capsule Type and Length are variable-length integers.
 The Capsule Value represents the payload of the capsule, and its semantics are determined by the payload type
 
 In the context of WebTransport over WebSockets, CAPSULEs are substituted by binary DATA FRAMES of WebSockets, following the format:
-```
+~~~
 WebSocketDataFrameCapsule {
   FrameHeader (..),
   PayloadData (..)
 }
-```
+~~~
 FrameHeader contains the first two bytes of the FRAME, and if present the extended payload length and masking key as defined in {{Section 5.2 of WEBSOCKET}}.
 PayloadData is defined as:
-```
+~~~
 PayloadData {
   Capsule Type (i),
   Capsule Value (..)
 }
-```
+~~~
 with the variable length integer Capsule Type and Capsule Value as in the CAPSULE protocol.
 
 Capsule length can be calculated from the Payload Length as set in {{Section 5.2 of WEBSOCKET}}:
@@ -158,10 +159,10 @@ as no Extension Data is allowed.
 
 ## Replacement for SETTINGS
 
-{{Section 3.1 WEBTRANSPORT-H2}} requires sending an SETTINGS_WEBTRANSPORT_MAX_SESSIONS settings parameter. This is not required here, as the protocol type is negotiated using the 
+{{Section 3.1 of WEBTRANSPORT-H2}} requires sending an SETTINGS_WEBTRANSPORT_MAX_SESSIONS settings parameter. This is not required here, as the protocol type is negotiated using the 
 subprotocol mechanism of WebSockets and SETTINGS_WEBTRANSPORT_MAX_SESSIONS equal to 1
 is assumed per WebSocket connection(HTTP1)/stream(HTTP2).
-Subsections of {{Section 3.4 WEBTRANSPORT-H2}} require sending initial SETTINGS for
+Subsections of {{Section 3.4 of WEBTRANSPORT-H2}} require sending initial SETTINGS for
 flow control. As SETTINGS are not accessible for the WebSocket protocol using the existing WebSocket interfaces, a replacement is required.
 
 Therefore client and server MUST send the initial flow control values using CAPSULES
@@ -169,8 +170,8 @@ immediately before ANY other capsules such as WT_STREAM or DATAGRAM capsules hav
 
 # Security Considerations
 
-The security considerations of {{Section 10 WEBSOCKET}} also apply here.
-The last paragraph of {{Section 8 WEBTRANSPORT-H2}} is equally applicable to this protocol.
+The security considerations of {{Section 10 of WEBSOCKET}} also apply here.
+The last paragraph of {{Section 8 of WEBTRANSPORT-H2}} is equally applicable to this protocol.
 
 # IANA Considerations
 
@@ -185,7 +186,7 @@ This specification establishes a new IANA registry for WebTransort Protocol Vers
 As part of this registry, IANA manages the following information (similar to {{WEBSOCKET}} versions):
 
    Version String
-      The version string name as part of the subprotocol defined in {{#websocket_subprotocol_name_registry}} and {{#connection_and_version_negotiation}}.  The value must only include alphanumeric characters.
+      The version string name as part of the subprotocol defined in {{websocket_subprotocol_name_registry}} and {{connection_and_version_negotiation}}.  The value must only include alphanumeric characters.
 
    Reference
       The RFC requesting a new version number or a draft name with
