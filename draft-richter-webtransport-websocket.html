@@ -1250,37 +1250,43 @@ CONTINUATION frames are processed per <span>[<a href="#WEBSOCKET" class="cite xr
 <a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-capsule-frames" class="section-name selfRef">Capsule frames</a>
         </h3>
 <p id="section-3.3-1">This protocol adopts the mechanisms and intrinsic elements outlined in <span>[<a href="#WEBTRANSPORT-H2" class="cite xref">WEBTRANSPORT-H2</a>]</span>, which itself is constructed upon the CAPSULE protocol originating from <span>[<a href="#DATAGRAM" class="cite xref">DATAGRAM</a>]</span>.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
-<p id="section-3.3-2">A CAPSULE has the form in <span>[<a href="#DATAGRAM" class="cite xref">DATAGRAM</a>]</span>:
-~~~
+<p id="section-3.3-2">A CAPSULE has the form in <span>[<a href="#DATAGRAM" class="cite xref">DATAGRAM</a>]</span>:<a href="#section-3.3-2" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-3.3-3">
+<pre>
 Capsule {
   Capsule Type (i),
   Capsule Length (i),
   Capsule Value (..),
 }
-~~~
-where Capsule Type and Length are variable-length integers.
-The Capsule Value represents the payload of the capsule, and its semantics are determined by the payload type<a href="#section-3.3-2" class="pilcrow">¶</a></p>
-<p id="section-3.3-3">In the context of WebTransport over WebSockets, CAPSULEs are substituted by binary DATA FRAMES of WebSockets, following the format:
-~~~
+</pre><a href="#section-3.3-3" class="pilcrow">¶</a>
+</div>
+<p id="section-3.3-4">where Capsule Type and Length are variable-length integers.
+The Capsule Value represents the payload of the capsule, and its semantics are determined by the payload type<a href="#section-3.3-4" class="pilcrow">¶</a></p>
+<p id="section-3.3-5">In the context of WebTransport over WebSockets, CAPSULEs are substituted by binary DATA FRAMES of WebSockets, following the format:<a href="#section-3.3-5" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-3.3-6">
+<pre>
 WebSocketDataFrameCapsule {
   FrameHeader (..),
   PayloadData (..)
 }
-~~~
-FrameHeader contains the first two bytes of the FRAME, and if present the extended payload length and masking key as defined in <span><a href="https://rfc-editor.org/rfc/rfc6455#section-5.2" class="relref">Section 5.2</a> of [<a href="#WEBSOCKET" class="cite xref">WEBSOCKET</a>]</span>.
-PayloadData is defined as:
-~~~
+</pre><a href="#section-3.3-6" class="pilcrow">¶</a>
+</div>
+<p id="section-3.3-7">FrameHeader contains the first two bytes of the FRAME, and if present the extended payload length and masking key as defined in <span><a href="https://rfc-editor.org/rfc/rfc6455#section-5.2" class="relref">Section 5.2</a> of [<a href="#WEBSOCKET" class="cite xref">WEBSOCKET</a>]</span>.
+PayloadData is defined as:<a href="#section-3.3-7" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-3.3-8">
+<pre>
 PayloadData {
   Capsule Type (i),
   Capsule Value (..)
 }
-~~~
-with the variable length integer Capsule Type and Capsule Value as in the CAPSULE protocol.<a href="#section-3.3-3" class="pilcrow">¶</a></p>
-<p id="section-3.3-4">Capsule length can be calculated from the Payload Length as set in <span><a href="https://rfc-editor.org/rfc/rfc6455#section-5.2" class="relref">Section 5.2</a> of [<a href="#WEBSOCKET" class="cite xref">WEBSOCKET</a>]</span>:
+</pre><a href="#section-3.3-8" class="pilcrow">¶</a>
+</div>
+<p id="section-3.3-9">with the variable length integer Capsule Type and Capsule Value as in the CAPSULE protocol.<a href="#section-3.3-9" class="pilcrow">¶</a></p>
+<p id="section-3.3-10">Capsule length can be calculated from the Payload Length as set in <span><a href="https://rfc-editor.org/rfc/rfc6455#section-5.2" class="relref">Section 5.2</a> of [<a href="#WEBSOCKET" class="cite xref">WEBSOCKET</a>]</span>:
 <code>
   Capsule Length = Payload Length - sizeof(Capsule Type),
 </code>
-as no Extension Data is allowed.<a href="#section-3.3-4" class="pilcrow">¶</a></p>
+as no Extension Data is allowed.<a href="#section-3.3-10" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="replacement-for-settings">
