@@ -2,10 +2,10 @@
 
 This is the working area for the individual Internet-Draft, "WebTransport over WebSocket".
 
-* [Editor's Copy](https://martenrichter.github.io/draft-ietf-webtransport-websocket/#go.draft-richter-webtransport-websocket.html)
+* [Editor's Copy](https://martenrichter.github.io/draft-ietf-webtransport-websocket/draft-richter-webtransport-websocket.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-richter-webtransport-websocket)
 * [Individual Draft](https://datatracker.ietf.org/doc/html/draft-richter-webtransport-websocket)
-* [Compare Editor's Copy to Individual Draft](https://martenrichter.github.io/draft-ietf-webtransport-websocket/#go.draft-richter-webtransport-websocket.diff)
+* [Compare Editor's Copy to Individual Draft](https://martenrichter.github.io/draft-ietf-webtransport-websocket/draft-richter-webtransport-websocket.diff)
 
 
 ## Contributing
