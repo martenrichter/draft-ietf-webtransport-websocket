@@ -2,10 +2,10 @@
 
 
 
-Network Working Group                                         M. Richter
+webtrans                                                      M. Richter
 Internet-Draft                             Technische Universität Berlin
-Intended status: Informational                            2 January 2024
-Expires: 5 July 2024
+Intended status: Standards Track                          3 January 2024
+Expires: 6 July 2024
 
 
                       WebTransport over WebSocket
@@ -20,10 +20,7 @@ Abstract
    offering WebTransport capabilities similar to the HTTP/2 variant
    [WEBTRANSPORT-H2].  It serves as an alternative when UDP-based
    protocols are inaccessible, and the client environment exclusively
-   supports WebSocket [WEBSOCKET]. *_DISCLAIMER: So far this document
-   was not submitted to any IETF WG.  Currently, it just describes the
-   protocol used for WebSocket connections of the @fails-components/
-   webtransport package._*
+   supports WebSocket [WEBSOCKET].
 
 Discussion Venues
 
@@ -47,7 +44,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 July 2024.
+   This Internet-Draft will expire on 6 July 2024.
 
 Copyright Notice
 
@@ -72,13 +69,14 @@ Table of Contents
      3.2.  Data framing
      3.3.  Capsule frames
      3.4.  Replacement for SETTINGS
-   4.  Security Considerations
-   5.  IANA Considerations
-     5.1.  WebSocket Subprotocol Name Registry
-     5.2.  WebTransport WebSocket Protocol Version Registry
-   6.  References
-     6.1.  Normative References
-     6.2.  Informative References
+   4.  Implementation Status
+   5.  Security Considerations
+   6.  IANA Considerations
+     6.1.  WebSocket Subprotocol Name Registry
+     6.2.  WebTransport WebSocket Protocol Version Registry
+   7.  References
+     7.1.  Normative References
+     7.2.  Informative References
    Acknowledgments
    Author's Address
 
@@ -237,22 +235,27 @@ Table of Contents
    using CAPSULES immediately before ANY other capsules such as
    WT_STREAM or DATAGRAM capsules have been sent.
 
-4.  Security Considerations
+4.  Implementation Status
+
+   The protocol is implemented in a node.js package (https://github.com/
+   fails-components/webtransport).
+
+5.  Security Considerations
 
    The security considerations of Section 10 of [WEBSOCKET] also apply
    here.  The last paragraph of Section 8 of [WEBTRANSPORT-H2] is
    equally applicable to this protocol.
 
-5.  IANA Considerations
+6.  IANA Considerations
 
-5.1.  WebSocket Subprotocol Name Registry
+6.1.  WebSocket Subprotocol Name Registry
 
    All possible subprotocol names following the format
    "webtransport_VERSION," where VERSION is an alphanumeric string
    denoting the subprotocol version of this protocol, are added to the
    registry as domains for this protocol and its successors.
 
-5.2.  WebTransport WebSocket Protocol Version Registry
+6.2.  WebTransport WebSocket Protocol Version Registry
 
    This specification establishes a new IANA registry for WebTransort
    Protocol Version names, intended for use with the WebSocket
@@ -263,7 +266,7 @@ Table of Contents
    (similar to [WEBSOCKET] versions):
 
    Version String The version string name as part of the subprotocol
-   defined in Section 5.1 and Section 3.1.  The value must only include
+   defined in Section 6.1 and Section 3.1.  The value must only include
    alphanumeric characters.
 
    Reference The RFC requesting a new version number or a draft name
@@ -284,9 +287,9 @@ Table of Contents
    Review" IANA registration policy [RFC5226] applies to the "Interim"
    version names.  The initial Designated Experts need to be determined.
 
-6.  References
+7.  References
 
-6.1.  Normative References
+7.1.  Normative References
 
    [HTTP]     Fielding, R. T., Nottingham, M., and J. Reschke, "HTTP
               Semantics", Work in Progress, Internet-Draft, draft-ietf-
@@ -338,7 +341,7 @@ Table of Contents
               <https://datatracker.ietf.org/doc/html/draft-ietf-
               webtrans-http3-08>.
 
-6.2.  Informative References
+7.2.  Informative References
 
    [DATAGRAM] Pauly, T., Kinnear, E., and D. Schinazi, "An Unreliable
               Datagram Extension to QUIC", RFC 9221,
