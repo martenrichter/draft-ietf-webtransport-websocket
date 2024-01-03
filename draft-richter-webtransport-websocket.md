@@ -1,16 +1,17 @@
 ---
 title: "WebTransport over WebSocket"
 abbrev: "WebTransport-WS"
-category: info
+category: std
 
 docname: draft-richter-webtransport-websocket-latest
 submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
 number:
 date: {DATE}
-consensus: true
-v: 3
-# area: art
-# workgroup: webtrans
+#consensus: true
+#v: 3
+ipr: trust200902
+area: art
+workgroup: webtrans
 keyword:
  - Internet-Draft
 #venue:
@@ -43,7 +44,6 @@ informative:
 
 WebTransport {{OVERVIEW}}, a protocol framework within the Web security model, empowers Web clients to initiate secure multiplexed transport for low-level client-server interactions with remote servers.
 This document outlines a protocol, based on WebSocket {{WEBSOCKET}}, offering WebTransport capabilities similar to the HTTP/2 variant {{WEBTRANSPORT-H2}}. It serves as an alternative when UDP-based protocols are inaccessible, and the client environment exclusively supports WebSocket {{WEBSOCKET}}.
-***DISCLAIMER: So far this document was not submitted to any IETF WG. Currently, it just describes the protocol used for WebSocket connections of the @fails-components/webtransport package.***
 
 --- middle
 
@@ -147,6 +147,10 @@ flow control. As SETTINGS are not accessible for the WebSocket protocol using th
 
 Therefore client and server MUST send the initial flow control values using CAPSULES
 immediately before ANY other capsules such as WT_STREAM or DATAGRAM capsules have been sent.
+
+# Implementation Status
+
+The protocol is implemented in a [node.js package](https://github.com/fails-components/webtransport).
 
 # Security Considerations
 
