@@ -8,7 +8,7 @@ submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
 number:
 date: {DATE}
 #consensus: true
-#v: 3
+v: 3
 ipr: trust200902
 area: art
 workgroup: webtrans
