@@ -1283,11 +1283,13 @@ PayloadData {
 </pre><a href="#section-3.3-8" class="pilcrow">¶</a>
 </div>
 <p id="section-3.3-9">with the variable length integer Capsule Type and Capsule Value as in the CAPSULE protocol.<a href="#section-3.3-9" class="pilcrow">¶</a></p>
-<p id="section-3.3-10">Capsule length can be calculated from the Payload Length as set in <span><a href="https://rfc-editor.org/rfc/rfc6455#section-5.2" class="relref">Section 5.2</a> of [<a href="#WEBSOCKET" class="cite xref">WEBSOCKET</a>]</span>:
-<code>
+<p id="section-3.3-10">Capsule length can be calculated from the Payload Length as set in <span><a href="https://rfc-editor.org/rfc/rfc6455#section-5.2" class="relref">Section 5.2</a> of [<a href="#WEBSOCKET" class="cite xref">WEBSOCKET</a>]</span>:<a href="#section-3.3-10" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-3.3-11">
+<pre>
   Capsule Length = Payload Length - sizeof(Capsule Type),
-</code>
-as no Extension Data is allowed.<a href="#section-3.3-10" class="pilcrow">¶</a></p>
+</pre><a href="#section-3.3-11" class="pilcrow">¶</a>
+</div>
+<p id="section-3.3-12">as no Extension Data is allowed.<a href="#section-3.3-12" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="replacement-for-settings">
@@ -1296,10 +1298,8 @@ as no Extension Data is allowed.<a href="#section-3.3-10" class="pilcrow">¶</a>
 <a href="#section-3.4" class="section-number selfRef">3.4. </a><a href="#name-replacement-for-settings" class="section-name selfRef">Replacement for SETTINGS</a>
         </h3>
 <p id="section-3.4-1"><span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-webtrans-http2-07#section-3.1" class="relref">Section 3.1</a> of [<a href="#WEBTRANSPORT-H2" class="cite xref">WEBTRANSPORT-H2</a>]</span> requires sending an SETTINGS_WEBTRANSPORT_MAX_SESSIONS settings parameter. This is not required here, as the protocol type is negotiated using the
-subprotocol mechanism of WebSockets and SETTINGS_WEBTRANSPORT_MAX_SESSIONS equal to 1
-is assumed per WebSocket connection(HTTP1)/stream(HTTP2).
-Subsections of <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-webtrans-http2-07#section-3.4" class="relref">Section 3.4</a> of [<a href="#WEBTRANSPORT-H2" class="cite xref">WEBTRANSPORT-H2</a>]</span> require sending initial SETTINGS for
-flow control. As SETTINGS are not accessible for the WebSocket protocol using the existing WebSocket interfaces, a replacement is required.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
+subprotocol mechanism of WebSockets and SETTINGS_WEBTRANSPORT_MAX_SESSIONS equal to 1 is assumed per WebSocket connection(HTTP1)/stream(HTTP2).
+Subsections of <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-webtrans-http2-07#section-3.4" class="relref">Section 3.4</a> of [<a href="#WEBTRANSPORT-H2" class="cite xref">WEBTRANSPORT-H2</a>]</span> require sending initial SETTINGS for flow control. As SETTINGS are not accessible for the WebSocket protocol using the existing WebSocket interfaces, a replacement is required.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
 <p id="section-3.4-2">Therefore client and server <span class="bcp14">MUST</span> send the initial flow control values using CAPSULES
 immediately before ANY other capsules such as WT_STREAM or DATAGRAM capsules have been sent.<a href="#section-3.4-2" class="pilcrow">¶</a></p>
 </section>

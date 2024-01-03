@@ -215,8 +215,11 @@ Table of Contents
    the CAPSULE protocol.
 
    Capsule length can be calculated from the Payload Length as set in
-   Section 5.2 of [WEBSOCKET]: Capsule Length = Payload Length -
-   sizeof(Capsule Type), as no Extension Data is allowed.
+   Section 5.2 of [WEBSOCKET]:
+
+     Capsule Length = Payload Length - sizeof(Capsule Type),
+
+   as no Extension Data is allowed.
 
 3.4.  Replacement for SETTINGS
 
