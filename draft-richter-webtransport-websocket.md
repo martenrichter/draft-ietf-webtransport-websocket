@@ -132,18 +132,17 @@ PayloadData {
 with the variable length integer Capsule Type and Capsule Value as in the CAPSULE protocol.
 
 Capsule length can be calculated from the Payload Length as set in {{Section 5.2 of WEBSOCKET}}:
-```
+
+~~~
   Capsule Length = Payload Length - sizeof(Capsule Type),
-```
+~~~
 as no Extension Data is allowed.
 
 ## Replacement for SETTINGS
 
 {{Section 3.1 of WEBTRANSPORT-H2}} requires sending an SETTINGS_WEBTRANSPORT_MAX_SESSIONS settings parameter. This is not required here, as the protocol type is negotiated using the
-subprotocol mechanism of WebSockets and SETTINGS_WEBTRANSPORT_MAX_SESSIONS equal to 1
-is assumed per WebSocket connection(HTTP1)/stream(HTTP2).
-Subsections of {{Section 3.4 of WEBTRANSPORT-H2}} require sending initial SETTINGS for
-flow control. As SETTINGS are not accessible for the WebSocket protocol using the existing WebSocket interfaces, a replacement is required.
+subprotocol mechanism of WebSockets and SETTINGS_WEBTRANSPORT_MAX_SESSIONS equal to 1 is assumed per WebSocket connection(HTTP1)/stream(HTTP2).
+Subsections of {{Section 3.4 of WEBTRANSPORT-H2}} require sending initial SETTINGS for flow control. As SETTINGS are not accessible for the WebSocket protocol using the existing WebSocket interfaces, a replacement is required.
 
 Therefore client and server MUST send the initial flow control values using CAPSULES
 immediately before ANY other capsules such as WT_STREAM or DATAGRAM capsules have been sent.
