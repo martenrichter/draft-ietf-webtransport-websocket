@@ -10,24 +10,24 @@
        WebTransport  , a protocol framework within the Web security model, empowers Web clients to initiate secure multiplexed transport for low-level client-server interactions with remote servers.
 This document outlines a protocol, based on WebSocket  , offering WebTransport capabilities similar to the HTTP/2 variant  . It serves as an alternative when UDP-based protocols are inaccessible, and the client environment exclusively supports WebSocket  . 
     " name="description">
-<meta content="xml2rfc 3.19.0" name="generator">
+<meta content="xml2rfc 3.20.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-richter-webtransport-websocket-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.19.0
-    Python 3.11.6
+  xml2rfc 3.20.0
+    Python 3.11.8
     ConfigArgParse 1.7
     google-i18n-address 3.1.0
     intervaltree 3.1.0
     Jinja2 3.1.2
     lxml 4.9.3
-    platformdirs 4.1.0
+    platformdirs 4.2.0
     pycountry 22.3.5
     PyYAML 6.0.1
     requests 2.31.0
     setuptools 68.2.2
     six 1.16.0
-    wcwidth 0.2.12
+    wcwidth 0.2.13
 -->
 <link href="draft-richter-webtransport-websocket.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1026,11 +1026,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">WebTransport-WS</td>
-<td class="right">January 2024</td>
+<td class="right">March 2024</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Richter</td>
-<td class="center">Expires 6 July 2024</td>
+<td class="center">Expires 10 September 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1043,12 +1043,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-richter-webtransport-websocket-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-01-03" class="published">3 January 2024</time>
+<time datetime="2024-03-09" class="published">9 March 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-07-06">6 July 2024</time></dd>
+<dd class="expires"><time datetime="2024-09-10">10 September 2024</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1091,7 +1091,7 @@ This document outlines a protocol, based on WebSocket <span>[<a href="#WEBSOCKET
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 6 July 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 10 September 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1206,7 +1206,7 @@ The server should incorporate WebTransport flow control constraints and capsule 
 "<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document are to be interpreted as
 described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they
 appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶</a></p>
-<p id="section-2-2">The document follows the terminology defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-webtrans-overview-06#section-1.2" class="relref">Section 1.2</a> of [<a href="#OVERVIEW" class="cite xref">OVERVIEW</a>]</span>.<a href="#section-2-2" class="pilcrow">¶</a></p>
+<p id="section-2-2">The document follows the terminology defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-webtrans-overview-07#section-1.2" class="relref">Section 1.2</a> of [<a href="#OVERVIEW" class="cite xref">OVERVIEW</a>]</span>.<a href="#section-2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="protocol-overview">
@@ -1234,12 +1234,7 @@ No protocol extensions <span class="bcp14">MUST</span> BE negotiated.<a href="#s
         </h3>
 <p id="section-3.2-1">The protocol uses the data frames as defined in <span><a href="https://rfc-editor.org/rfc/rfc6455#section-5" class="relref">Section 5</a> of [<a href="#WEBSOCKET" class="cite xref">WEBSOCKET</a>]</span>.
 PING and PONG frame handling is not changed <span><a href="https://rfc-editor.org/rfc/rfc6455#section-5.5" class="relref">Section 5.5</a> of [<a href="#WEBSOCKET" class="cite xref">WEBSOCKET</a>]</span>.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
-<p id="section-3.2-2">The CLOSE frame <span><a href="https://rfc-editor.org/rfc/rfc6455#section-5.5.1" class="relref">Section 5.5.1</a> of [<a href="#WEBSOCKET" class="cite xref">WEBSOCKET</a>]</span> replaces the mechanism invoked after CONNECT stream closure in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-webtrans-http2-07#section-2" class="relref">Section 2</a> of [<a href="#WEBTRANSPORT-H2" class="cite xref">WEBTRANSPORT-H2</a>]</span>.
-The body <span class="bcp14">MUST</span> include a UTF-8 encoded reason string when transmitted by a protocol-aware client or server.
-The reason string has the form "CODE:REASONSTRING", where CODE is a text representation of an unsigned 32-bit decimal integer in the range of between 0x00000000 and
-0xffffffff <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-webtrans-http3-08#section-4.3" class="relref">Section 4.3</a> of [<a href="#WEBTRANSPORT-H3" class="cite xref">WEBTRANSPORT-H3</a>]</span>. REASONSTRING is the actual reason transmitted
-through WebTransport.
-A close FRAME without a reason may be sent by protocol-unaware WebClients or proxies. In such instances, the CODE and REASONSTRING are reconstructed using the WebSocket Close Code Number as specified in the WebSocketCloseCode Registry outlined in <span><a href="https://rfc-editor.org/rfc/rfc6455#section-11.7" class="relref">Section 11.7</a> of [<a href="#WEBSOCKET" class="cite xref">WEBSOCKET</a>]</span>.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
+<p id="section-3.2-2">For closing a session a CLOSE_WEBTRANSPORT_SESSION capsule followed by the CLOSE frame <span><a href="https://rfc-editor.org/rfc/rfc6455#section-5.5.1" class="relref">Section 5.5.1</a> of [<a href="#WEBSOCKET" class="cite xref">WEBSOCKET</a>]</span> is sent.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
 <p id="section-3.2-3">Data Frames containing Text are reserved for future use and <span class="bcp14">MUST NOT</span> be sent.
 Binary Data Frames transport CAPSULE content defined in <span>[<a href="#WEBTRANSPORT-H2" class="cite xref">WEBTRANSPORT-H2</a>]</span> and <span>[<a href="#DATAGRAM" class="cite xref">DATAGRAM</a>]</span>. For details, refer to the next section <a href="#capsule-frames" class="auto internal xref">Section 3.3</a>. Their length is limited by WebTransport flow control, and a violation <span class="bcp14">SHOULD</span> lead to connection termination.
 CONTINUATION frames are processed per <span>[<a href="#WEBSOCKET" class="cite xref">WEBSOCKET</a>]</span> specifications. Given the streaming nature of the content, partial DATA frames or CONTINUATION frames should be promptly forwarded to corresponding streams reducing latency.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
@@ -1297,9 +1292,9 @@ PayloadData {
         <h3 id="name-replacement-for-settings">
 <a href="#section-3.4" class="section-number selfRef">3.4. </a><a href="#name-replacement-for-settings" class="section-name selfRef">Replacement for SETTINGS</a>
         </h3>
-<p id="section-3.4-1"><span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-webtrans-http2-07#section-3.1" class="relref">Section 3.1</a> of [<a href="#WEBTRANSPORT-H2" class="cite xref">WEBTRANSPORT-H2</a>]</span> requires sending an SETTINGS_WEBTRANSPORT_MAX_SESSIONS settings parameter. This is not required here, as the protocol type is negotiated using the
+<p id="section-3.4-1"><span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-webtrans-http2-08#section-3.1" class="relref">Section 3.1</a> of [<a href="#WEBTRANSPORT-H2" class="cite xref">WEBTRANSPORT-H2</a>]</span> requires sending an SETTINGS_WEBTRANSPORT_MAX_SESSIONS settings parameter. This is not required here, as the protocol type is negotiated using the
 subprotocol mechanism of WebSockets and SETTINGS_WEBTRANSPORT_MAX_SESSIONS equal to 1 is assumed per WebSocket connection(HTTP1)/stream(HTTP2).
-Subsections of <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-webtrans-http2-07#section-3.4" class="relref">Section 3.4</a> of [<a href="#WEBTRANSPORT-H2" class="cite xref">WEBTRANSPORT-H2</a>]</span> require sending initial SETTINGS for flow control. As SETTINGS are not accessible for the WebSocket protocol using the existing WebSocket interfaces, a replacement is required.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
+Subsections of <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-webtrans-http2-08#section-3.4" class="relref">Section 3.4</a> of [<a href="#WEBTRANSPORT-H2" class="cite xref">WEBTRANSPORT-H2</a>]</span> require sending initial SETTINGS for flow control. As SETTINGS are not accessible for the WebSocket protocol using the existing WebSocket interfaces, a replacement is required.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
 <p id="section-3.4-2">Therefore client and server <span class="bcp14">MUST</span> send the initial flow control values using CAPSULES
 immediately before ANY other capsules such as WT_STREAM or DATAGRAM capsules have been sent.<a href="#section-3.4-2" class="pilcrow">¶</a></p>
 </section>
@@ -1320,7 +1315,7 @@ immediately before ANY other capsules such as WT_STREAM or DATAGRAM capsules hav
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
 <p id="section-5-1">The security considerations of <span><a href="https://rfc-editor.org/rfc/rfc6455#section-10" class="relref">Section 10</a> of [<a href="#WEBSOCKET" class="cite xref">WEBSOCKET</a>]</span> also apply here.
-The last paragraph of <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-webtrans-http2-07#section-8" class="relref">Section 8</a> of [<a href="#WEBTRANSPORT-H2" class="cite xref">WEBTRANSPORT-H2</a>]</span> is equally applicable to this protocol.<a href="#section-5-1" class="pilcrow">¶</a></p>
+The last paragraph of <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-webtrans-http2-08#section-8" class="relref">Section 8</a> of [<a href="#WEBTRANSPORT-H2" class="cite xref">WEBTRANSPORT-H2</a>]</span> is equally applicable to this protocol.<a href="#section-5-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
@@ -1374,7 +1369,7 @@ The last paragraph of <span><a href="https://datatracker.ietf.org/doc/html/draft
 <dd class="break"></dd>
 <dt id="OVERVIEW">[OVERVIEW]</dt>
         <dd>
-<span class="refAuthor">Vasiliev, V.</span>, <span class="refTitle">"The WebTransport Protocol Framework"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-webtrans-overview-06</span>, <time datetime="2023-09-06" class="refDate">6 September 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-webtrans-overview-06">https://datatracker.ietf.org/doc/html/draft-ietf-webtrans-overview-06</a>&gt;</span>. </dd>
+<span class="refAuthor">Vasiliev, V.</span>, <span class="refTitle">"The WebTransport Protocol Framework"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-webtrans-overview-07</span>, <time datetime="2024-03-04" class="refDate">4 March 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-webtrans-overview-07">https://datatracker.ietf.org/doc/html/draft-ietf-webtrans-overview-07</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
@@ -1398,11 +1393,11 @@ The last paragraph of <span><a href="https://datatracker.ietf.org/doc/html/draft
 <dd class="break"></dd>
 <dt id="WEBTRANSPORT-H2">[WEBTRANSPORT-H2]</dt>
         <dd>
-<span class="refAuthor">Frindell, A.</span>, <span class="refAuthor">Kinnear, E.</span>, <span class="refAuthor">Pauly, T.</span>, <span class="refAuthor">Thomson, M.</span>, <span class="refAuthor">Vasiliev, V.</span>, and <span class="refAuthor">G. Xie</span>, <span class="refTitle">"WebTransport over HTTP/2"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-webtrans-http2-07</span>, <time datetime="2023-10-23" class="refDate">23 October 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-webtrans-http2-07">https://datatracker.ietf.org/doc/html/draft-ietf-webtrans-http2-07</a>&gt;</span>. </dd>
+<span class="refAuthor">Frindell, A.</span>, <span class="refAuthor">Kinnear, E.</span>, <span class="refAuthor">Pauly, T.</span>, <span class="refAuthor">Thomson, M.</span>, <span class="refAuthor">Vasiliev, V.</span>, and <span class="refAuthor">G. Xie</span>, <span class="refTitle">"WebTransport over HTTP/2"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-webtrans-http2-08</span>, <time datetime="2024-03-04" class="refDate">4 March 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-webtrans-http2-08">https://datatracker.ietf.org/doc/html/draft-ietf-webtrans-http2-08</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="WEBTRANSPORT-H3">[WEBTRANSPORT-H3]</dt>
       <dd>
-<span class="refAuthor">Frindell, A.</span>, <span class="refAuthor">Kinnear, E.</span>, and <span class="refAuthor">V. Vasiliev</span>, <span class="refTitle">"WebTransport over HTTP/3"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-webtrans-http3-08</span>, <time datetime="2023-10-23" class="refDate">23 October 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-webtrans-http3-08">https://datatracker.ietf.org/doc/html/draft-ietf-webtrans-http3-08</a>&gt;</span>. </dd>
+<span class="refAuthor">Frindell, A.</span>, <span class="refAuthor">Kinnear, E.</span>, and <span class="refAuthor">V. Vasiliev</span>, <span class="refTitle">"WebTransport over HTTP/3"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-webtrans-http3-09</span>, <time datetime="2024-03-04" class="refDate">4 March 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-webtrans-http3-09">https://datatracker.ietf.org/doc/html/draft-ietf-webtrans-http3-09</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>

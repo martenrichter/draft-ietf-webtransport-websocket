@@ -4,8 +4,8 @@
 
 webtrans                                                      M. Richter
 Internet-Draft                             Technische Universität Berlin
-Intended status: Standards Track                          3 January 2024
-Expires: 6 July 2024
+Intended status: Standards Track                            9 March 2024
+Expires: 10 September 2024
 
 
                       WebTransport over WebSocket
@@ -44,7 +44,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 July 2024.
+   This Internet-Draft will expire on 10 September 2024.
 
 Copyright Notice
 
@@ -151,19 +151,8 @@ Table of Contents
    [WEBSOCKET].  PING and PONG frame handling is not changed Section 5.5
    of [WEBSOCKET].
 
-   The CLOSE frame Section 5.5.1 of [WEBSOCKET] replaces the mechanism
-   invoked after CONNECT stream closure in Section 2 of
-   [WEBTRANSPORT-H2].  The body MUST include a UTF-8 encoded reason
-   string when transmitted by a protocol-aware client or server.  The
-   reason string has the form "CODE:REASONSTRING", where CODE is a text
-   representation of an unsigned 32-bit decimal integer in the range of
-   between 0x00000000 and 0xffffffff Section 4.3 of [WEBTRANSPORT-H3].
-   REASONSTRING is the actual reason transmitted through WebTransport.
-   A close FRAME without a reason may be sent by protocol-unaware
-   WebClients or proxies.  In such instances, the CODE and REASONSTRING
-   are reconstructed using the WebSocket Close Code Number as specified
-   in the WebSocketCloseCode Registry outlined in Section 11.7 of
-   [WEBSOCKET].
+   For closing a session a CLOSE_WEBTRANSPORT_SESSION capsule followed
+   by the CLOSE frame Section 5.5.1 of [WEBSOCKET] is sent.
 
    Data Frames containing Text are reserved for future use and MUST NOT
    be sent.  Binary Data Frames transport CAPSULE content defined in
@@ -302,9 +291,8 @@ Table of Contents
 
    [OVERVIEW] Vasiliev, V., "The WebTransport Protocol Framework", Work
               in Progress, Internet-Draft, draft-ietf-webtrans-overview-
-              06, 6 September 2023,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-
-              webtrans-overview-06>.
+              07, 4 March 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-webtrans-overview-07>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -333,16 +321,16 @@ Table of Contents
    [WEBTRANSPORT-H2]
               Frindell, A., Kinnear, E., Pauly, T., Thomson, M.,
               Vasiliev, V., and G. Xie, "WebTransport over HTTP/2", Work
-              in Progress, Internet-Draft, draft-ietf-webtrans-http2-07,
-              23 October 2023, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-webtrans-http2-07>.
+              in Progress, Internet-Draft, draft-ietf-webtrans-http2-08,
+              4 March 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-webtrans-http2-08>.
 
    [WEBTRANSPORT-H3]
               Frindell, A., Kinnear, E., and V. Vasiliev, "WebTransport
               over HTTP/3", Work in Progress, Internet-Draft, draft-
-              ietf-webtrans-http3-08, 23 October 2023,
+              ietf-webtrans-http3-09, 4 March 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-
-              webtrans-http3-08>.
+              webtrans-http3-09>.
 
 7.2.  Informative References
 
