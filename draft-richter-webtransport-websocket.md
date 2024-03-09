@@ -86,12 +86,7 @@ No protocol extensions MUST BE negotiated.
 The protocol uses the data frames as defined in {{Section 5 of WEBSOCKET}}.
 PING and PONG frame handling is not changed {{Section 5.5 of WEBSOCKET}}.
 
-The CLOSE frame {{Section 5.5.1 of WEBSOCKET}} replaces the mechanism invoked after CONNECT stream closure in {{Section 2 of WEBTRANSPORT-H2}}.
-The body MUST include a UTF-8 encoded reason string when transmitted by a protocol-aware client or server.
-The reason string has the form "CODE:REASONSTRING", where CODE is a text representation of an unsigned 32-bit decimal integer in the range of between 0x00000000 and
-0xffffffff {{Section 4.3 of WEBTRANSPORT-H3}}. REASONSTRING is the actual reason transmitted
-through WebTransport.
-A close FRAME without a reason may be sent by protocol-unaware WebClients or proxies. In such instances, the CODE and REASONSTRING are reconstructed using the WebSocket Close Code Number as specified in the WebSocketCloseCode Registry outlined in {{Section 11.7 of WEBSOCKET}}.
+For closing a session a CLOSE_WEBTRANSPORT_SESSION capsule followed by the CLOSE frame {{Section 5.5.1 of WEBSOCKET}} is sent.
 
 Data Frames containing Text are reserved for future use and MUST NOT be sent.
 Binary Data Frames transport CAPSULE content defined in {{WEBTRANSPORT-H2}} and {{DATAGRAM}}. For details, refer to the next section {{capsule-frames}}. Their length is limited by WebTransport flow control, and a violation SHOULD lead to connection termination.
