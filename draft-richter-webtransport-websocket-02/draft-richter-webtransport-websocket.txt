@@ -4,8 +4,8 @@
 
 webtrans                                                      M. Richter
 Internet-Draft                             Technische Universität Berlin
-Intended status: Standards Track                            30 June 2024
-Expires: 1 January 2025
+Intended status: Standards Track                        22 December 2024
+Expires: 25 June 2025
 
 
                       WebTransport over WebSocket
@@ -44,7 +44,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 January 2025.
+   This Internet-Draft will expire on 25 June 2025.
 
 Copyright Notice
 
@@ -291,8 +291,9 @@ Table of Contents
 
    [OVERVIEW] Vasiliev, V., "The WebTransport Protocol Framework", Work
               in Progress, Internet-Draft, draft-ietf-webtrans-overview-
-              07, 4 March 2024, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-webtrans-overview-07>.
+              08, 25 August 2024,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-
+              webtrans-overview-08>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -321,16 +322,16 @@ Table of Contents
    [WEBTRANSPORT-H2]
               Frindell, A., Kinnear, E., Pauly, T., Thomson, M.,
               Vasiliev, V., and G. Xie, "WebTransport over HTTP/2", Work
-              in Progress, Internet-Draft, draft-ietf-webtrans-http2-08,
-              4 March 2024, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-webtrans-http2-08>.
+              in Progress, Internet-Draft, draft-ietf-webtrans-http2-10,
+              21 October 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-webtrans-http2-10>.
 
    [WEBTRANSPORT-H3]
               Frindell, A., Kinnear, E., and V. Vasiliev, "WebTransport
               over HTTP/3", Work in Progress, Internet-Draft, draft-
-              ietf-webtrans-http3-09, 4 March 2024,
+              ietf-webtrans-http3-11, 21 October 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-
-              webtrans-http3-09>.
+              webtrans-http3-11>.
 
 7.2.  Informative References
 
