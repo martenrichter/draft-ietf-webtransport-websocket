@@ -4,8 +4,8 @@
 
 webtrans                                                      M. Richter
 Internet-Draft                             Technische Universität Berlin
-Intended status: Standards Track                        22 December 2024
-Expires: 25 June 2025
+Intended status: Standards Track                           12 April 2025
+Expires: 14 October 2025
 
 
                       WebTransport over WebSocket
@@ -44,11 +44,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 25 June 2025.
+   This Internet-Draft will expire on 14 October 2025.
 
 Copyright Notice
 
-   Copyright (c) 2024 IETF Trust and the persons identified as the
+   Copyright (c) 2025 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -65,7 +65,8 @@ Table of Contents
    1.  Introduction
    2.  Conventions and Definitions
    3.  Protocol Overview
-     3.1.  Connection and version negotiation
+     3.1.  Connection, version negotiation and application level
+           protocol
      3.2.  Data framing
      3.3.  Capsule frames
      3.4.  Replacement for SETTINGS
@@ -92,16 +93,16 @@ Table of Contents
    native WebClient implementation due to the usual unavailability of
    plain UDP and TCP/IP socket access for scripts within WebClients
 
-   This document defines a protocol implementable on the WebClient using
-   available scripting languages, without altering the WebClient's
-   native code.  It uses the widespread WebSocket protocol as the base
-   without modification.  However, a direct implementation in a
-   WebClient is possible.
+   This document defines a protocol that can be implemented on the
+   WebClient using available scripting languages without altering the
+   WebClient's native code.  It uses the widespread WebSocket protocol
+   as the base without modification.  However, a direct implementation
+   in a WebClient is possible.
 
    The protocol utilizes capsule semantics derived from
    [WEBTRANSPORT-H2] and translates them into WebSocket frames.  By
    relying on WebSockets, also intermediates such as proxies unaware of
-   WebTransports can apply application layer processing.
+   WebTransports can apply application-layer processing.
 
    An implementation should support both WebSocket over http/1 and
    http/2.  The server should incorporate WebTransport flow control
@@ -128,7 +129,7 @@ Table of Contents
    The protocol uses [WEBTRANSPORT-H2] semantics with the following
    modifications.
 
-3.1.  Connection and version negotiation
+3.1.  Connection, version negotiation and application level protocol
 
    The WebSocket connection is established according to Section 4 of
    [WEBSOCKET] or [WEBSOCKET-H2].
@@ -137,11 +138,18 @@ Table of Contents
    server select the WebTransport-Websocket protocol by setting |Sec-
    WebSocket-Protocol| Section 1.9 of [WEBSOCKET] to the supported
    versions.  The protocol names follow the scheme
-   "webtransport_VERSIONAME", where VERSIONNAME identifies the
-   particular protocol version.  For this protocol VERSIONAME would be
-   "kDraft1" and the |Sec-WebSocket-Protocol| field would include
-   "webtransport_kDraft1".  The protocol negotiation follows the
-   procedures as described in Section 4.1 of [WEBSOCKET] and
+   "webtransport_VERSIONNAME" or
+   "webtransport_VERSIONNAME_APPLICATIONLEVELPROTOCOL, where VERSIONNAME
+   identifies the particular protocol version and
+   APPLICATIONLEVELPROTOCOL an application-level protocol.  For this
+   protocol version, VERSIONNAME would be "kDraft2" and the |Sec-
+   WebSocket-Protocol| field would include "webtransport_kDraft2" or
+   "webtransport_kDraft2_application_level_protocol" for an application-
+   level protocol "application_level_protocol".  The application level
+   protocol is the same available handled via WT-Available-Protocols and
+   WT-Protocol described in Section 3.4 of [WEBTRANSPORT-H2] and
+   Section 3.4 of [WEBTRANSPORT-H3].  The protocol negotiation follows
+   the procedures as described in Section 4.1 of [WEBSOCKET] and
    Section 4.2.2 of [WEBSOCKET].  No protocol extensions MUST BE
    negotiated.
 
@@ -151,7 +159,7 @@ Table of Contents
    [WEBSOCKET].  PING and PONG frame handling is not changed Section 5.5
    of [WEBSOCKET].
 
-   For closing a session a CLOSE_WEBTRANSPORT_SESSION capsule followed
+   For closing a session, a CLOSE_WEBTRANSPORT_SESSION capsule followed
    by the CLOSE frame Section 5.5.1 of [WEBSOCKET] is sent.
 
    Data Frames containing Text are reserved for future use and MUST NOT
@@ -212,13 +220,13 @@ Table of Contents
 
 3.4.  Replacement for SETTINGS
 
-   Section 3.1 of [WEBTRANSPORT-H2] requires sending an
+   Section 3.2 of [WEBTRANSPORT-H2] requires sending an
    SETTINGS_WEBTRANSPORT_MAX_SESSIONS settings parameter.  This is not
    required here, as the protocol type is negotiated using the
    subprotocol mechanism of WebSockets and
    SETTINGS_WEBTRANSPORT_MAX_SESSIONS equal to 1 is assumed per
    WebSocket connection(HTTP1)/stream(HTTP2).  Subsections of
-   Section 3.4 of [WEBTRANSPORT-H2] require sending initial SETTINGS for
+   Section 4.3 of [WEBTRANSPORT-H2] require sending initial SETTINGS for
    flow control.  As SETTINGS are not accessible for the WebSocket
    protocol using the existing WebSocket interfaces, a replacement is
    required.
@@ -243,13 +251,15 @@ Table of Contents
 6.1.  WebSocket Subprotocol Name Registry
 
    All possible subprotocol names following the format
-   "webtransport_VERSION," where VERSION is an alphanumeric string
-   denoting the subprotocol version of this protocol, are added to the
-   registry as domains for this protocol and its successors.
+   "webtransport_VERSION" and "webtransport_VERSION_SUBPROTOCOL," where
+   VERSION is an alphanumeric string denoting the subprotocol version of
+   this protocol and SUBPROTOCOL can be any application-level string,
+   are added to the registry as domains for this protocol and its
+   successors.
 
 6.2.  WebTransport WebSocket Protocol Version Registry
 
-   This specification establishes a new IANA registry for WebTransort
+   This specification establishes a new IANA registry for WebTransport
    Protocol Version names, intended for use with the WebSocket
    WebTransport Protocol, in alignment with the principles outlined in
    [RFC5226].
@@ -291,9 +301,9 @@ Table of Contents
 
    [OVERVIEW] Vasiliev, V., "The WebTransport Protocol Framework", Work
               in Progress, Internet-Draft, draft-ietf-webtrans-overview-
-              08, 25 August 2024,
+              09, 25 February 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-
-              webtrans-overview-08>.
+              webtrans-overview-09>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -322,16 +332,16 @@ Table of Contents
    [WEBTRANSPORT-H2]
               Frindell, A., Kinnear, E., Pauly, T., Thomson, M.,
               Vasiliev, V., and G. Xie, "WebTransport over HTTP/2", Work
-              in Progress, Internet-Draft, draft-ietf-webtrans-http2-10,
-              21 October 2024, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-webtrans-http2-10>.
+              in Progress, Internet-Draft, draft-ietf-webtrans-http2-11,
+              16 March 2025, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-webtrans-http2-11>.
 
    [WEBTRANSPORT-H3]
               Frindell, A., Kinnear, E., and V. Vasiliev, "WebTransport
               over HTTP/3", Work in Progress, Internet-Draft, draft-
-              ietf-webtrans-http3-11, 21 October 2024,
+              ietf-webtrans-http3-12, 3 March 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-
-              webtrans-http3-11>.
+              webtrans-http3-12>.
 
 7.2.  Informative References
 
