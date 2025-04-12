@@ -53,12 +53,12 @@ WebTransport {{OVERVIEW}} is designed to facilitate communication for Web client
 
 Both {{WEBTRANSPORT-H2}} and {{WEBTRANSPORT-H3}} variants require a native WebClient implementation due to the usual unavailability of plain UDP and TCP/IP socket access for scripts within WebClients
 
-This document defines a protocol implementable on the WebClient using available scripting languages, without altering the WebClient's native code.
+This document defines a protocol that can be implemented on the WebClient using available scripting languages without altering the WebClient's native code.
 It uses the widespread WebSocket protocol as the base without modification.
 However, a direct implementation in a WebClient is possible.
 
 The protocol utilizes capsule semantics derived from {{WEBTRANSPORT-H2}} and translates them into WebSocket frames. By relying on WebSockets, also intermediates such as proxies
-unaware of WebTransports can apply application layer processing.
+unaware of WebTransports can apply application-layer processing.
 
 An implementation should support both WebSocket over http/1 and http/2.
 The server should incorporate WebTransport flow control constraints and capsule processing into its WebSocket parser code. Therefore, using unmodified existing WebSocket code is not recommended.
@@ -75,10 +75,11 @@ WebTransport servers are identified by an HTTPS URI per {{Section 4.2.2 of HTTP}
 
 The protocol uses {{WEBTRANSPORT-H2}} semantics with the following modifications.
 
-## Connection and version negotiation
+## Connection, version negotiation and application level protocol
 The WebSocket connection is established according to {{Section 4 of WEBSOCKET}} or {{WEBSOCKET-H2}}.
 
-When a WebSocket connection is established, both the client and server select the WebTransport-Websocket protocol by setting |Sec-WebSocket-Protocol| {{Section 1.9 of WEBSOCKET}} to the supported versions. The protocol names follow the scheme "webtransport_VERSIONAME", where VERSIONNAME identifies the particular protocol version. For this protocol VERSIONAME would be "kDraft1" and the |Sec-WebSocket-Protocol| field would include "webtransport_kDraft1".
+When a WebSocket connection is established, both the client and server select the WebTransport-Websocket protocol by setting |Sec-WebSocket-Protocol| {{Section 1.9 of WEBSOCKET}} to the supported versions. The protocol names follow the scheme "webtransport_VERSIONNAME" or "webtransport_VERSIONNAME_APPLICATIONLEVELPROTOCOL, where VERSIONNAME identifies the particular protocol version and APPLICATIONLEVELPROTOCOL an application-level protocol. For this protocol version, VERSIONNAME would be "kDraft2" and the |Sec-WebSocket-Protocol| field would include "webtransport_kDraft2" or "webtransport_kDraft2_application_level_protocol" for an application-level protocol "application_level_protocol".
+The application level protocol is the same available handled via `WT-Available-Protocols` and `WT-Protocol`  described in {{Section 3.4 of WEBTRANSPORT-H2}} and {{ 3.4 of WEBTRANSPORT-H3}}.
 The protocol negotiation follows the procedures as described in {{Section 4.1 of WEBSOCKET}} and {{Section 4.2.2 of WEBSOCKET}}.
 No protocol extensions MUST BE negotiated.
 
@@ -86,7 +87,7 @@ No protocol extensions MUST BE negotiated.
 The protocol uses the data frames as defined in {{Section 5 of WEBSOCKET}}.
 PING and PONG frame handling is not changed {{Section 5.5 of WEBSOCKET}}.
 
-For closing a session a CLOSE_WEBTRANSPORT_SESSION capsule followed by the CLOSE frame {{Section 5.5.1 of WEBSOCKET}} is sent.
+For closing a session, a CLOSE_WEBTRANSPORT_SESSION capsule followed by the CLOSE frame {{Section 5.5.1 of WEBSOCKET}} is sent.
 
 Data Frames containing Text are reserved for future use and MUST NOT be sent.
 Binary Data Frames transport CAPSULE content defined in {{WEBTRANSPORT-H2}} and {{DATAGRAM}}. For details, refer to the next section {{capsule-frames}}. Their length is limited by WebTransport flow control, and a violation SHOULD lead to connection termination.
@@ -155,11 +156,11 @@ The last paragraph of {{Section 8 of WEBTRANSPORT-H2}} is equally applicable to 
 
 ## WebSocket Subprotocol Name Registry
 
-All possible subprotocol names following the format "webtransport_VERSION," where VERSION is an alphanumeric string denoting the subprotocol version of this protocol, are added to the registry as domains for this protocol and its successors.
+All possible subprotocol names following the format "webtransport_VERSION" and "webtransport_VERSION_SUBPROTOCOL," where VERSION is an alphanumeric string denoting the subprotocol version of this protocol and SUBPROTOCOL can be any application-level string, are added to the registry as domains for this protocol and its successors.
 
 ## WebTransport WebSocket Protocol Version Registry
 
-This specification establishes a new IANA registry for WebTransort Protocol Version names, intended for use with the WebSocket WebTransport Protocol, in alignment with the principles outlined in {{!RFC5226}}.
+This specification establishes a new IANA registry for WebTransport Protocol Version names, intended for use with the WebSocket WebTransport Protocol, in alignment with the principles outlined in {{!RFC5226}}.
 
 As part of this registry, IANA manages the following information (similar to {{WEBSOCKET}} versions):
 
