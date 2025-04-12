@@ -79,7 +79,7 @@ The protocol uses {{WEBTRANSPORT-H2}} semantics with the following modifications
 The WebSocket connection is established according to {{Section 4 of WEBSOCKET}} or {{WEBSOCKET-H2}}.
 
 When a WebSocket connection is established, both the client and server select the WebTransport-Websocket protocol by setting |Sec-WebSocket-Protocol| {{Section 1.9 of WEBSOCKET}} to the supported versions. The protocol names follow the scheme "webtransport_VERSIONNAME" or "webtransport_VERSIONNAME_APPLICATIONLEVELPROTOCOL, where VERSIONNAME identifies the particular protocol version and APPLICATIONLEVELPROTOCOL an application-level protocol. For this protocol version, VERSIONNAME would be "kDraft2" and the |Sec-WebSocket-Protocol| field would include "webtransport_kDraft2" or "webtransport_kDraft2_application_level_protocol" for an application-level protocol "application_level_protocol".
-The application level protocol is the same available handled via `WT-Available-Protocols` and `WT-Protocol`  described in {{Section 3.4 of WEBTRANSPORT-H2}} and {{3.4 of WEBTRANSPORT-H3}}.
+The application level protocol is the same available handled via `WT-Available-Protocols` and `WT-Protocol`  described in {{Section 3.4 of WEBTRANSPORT-H2}} and {{Section 3.4 of WEBTRANSPORT-H3}}.
 The protocol negotiation follows the procedures as described in {{Section 4.1 of WEBSOCKET}} and {{Section 4.2.2 of WEBSOCKET}}.
 No protocol extensions MUST BE negotiated.
 
