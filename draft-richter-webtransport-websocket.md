@@ -30,8 +30,8 @@ author:
 
 normative:
   OVERVIEW: I-D.ietf-webtrans-overview
-  WEBTRANSPORT-H3: I-D.ietf-webtrans-http3
-  WEBTRANSPORT-H2: I-D.ietf-webtrans-http2
+  WEBTRANSPORT-H3: I-D.ietf-webtrans-http3-12
+  WEBTRANSPORT-H2: I-D.ietf-webtrans-http2-11
   HTTP: I-D.ietf-httpbis-semantics
   WEBSOCKET: RFC6455
   WEBSOCKET-H2: RFC8441
@@ -79,7 +79,7 @@ The protocol uses {{WEBTRANSPORT-H2}} semantics with the following modifications
 The WebSocket connection is established according to {{Section 4 of WEBSOCKET}} or {{WEBSOCKET-H2}}.
 
 When a WebSocket connection is established, both the client and server select the WebTransport-Websocket protocol by setting |Sec-WebSocket-Protocol| {{Section 1.9 of WEBSOCKET}} to the supported versions. The protocol names follow the scheme "webtransport_VERSIONNAME" or "webtransport_VERSIONNAME_APPLICATIONLEVELPROTOCOL, where VERSIONNAME identifies the particular protocol version and APPLICATIONLEVELPROTOCOL an application-level protocol. For this protocol version, VERSIONNAME would be "kDraft2" and the |Sec-WebSocket-Protocol| field would include "webtransport_kDraft2" or "webtransport_kDraft2_application_level_protocol" for an application-level protocol "application_level_protocol".
-The application level protocol is the same available handled via `WT-Available-Protocols` and `WT-Protocol`  described in {{Section 3.4 of WEBTRANSPORT-H2}} and {{ 3.4 of WEBTRANSPORT-H3}}.
+The application level protocol is the same available handled via `WT-Available-Protocols` and `WT-Protocol`  described in {{Section 3.4 of WEBTRANSPORT-H2}} and {{Section 3.4 of WEBTRANSPORT-H3}}.
 The protocol negotiation follows the procedures as described in {{Section 4.1 of WEBSOCKET}} and {{Section 4.2.2 of WEBSOCKET}}.
 No protocol extensions MUST BE negotiated.
 
@@ -136,9 +136,9 @@ as no Extension Data is allowed.
 
 ## Replacement for SETTINGS
 
-{{Section 3.1 of WEBTRANSPORT-H2}} requires sending an SETTINGS_WEBTRANSPORT_MAX_SESSIONS settings parameter. This is not required here, as the protocol type is negotiated using the
+{{Section 3.2 of WEBTRANSPORT-H2}} requires sending an SETTINGS_WEBTRANSPORT_MAX_SESSIONS settings parameter. This is not required here, as the protocol type is negotiated using the
 subprotocol mechanism of WebSockets and SETTINGS_WEBTRANSPORT_MAX_SESSIONS equal to 1 is assumed per WebSocket connection(HTTP1)/stream(HTTP2).
-Subsections of {{Section 3.4 of WEBTRANSPORT-H2}} require sending initial SETTINGS for flow control. As SETTINGS are not accessible for the WebSocket protocol using the existing WebSocket interfaces, a replacement is required.
+Subsections of {{Section 4.3 of WEBTRANSPORT-H2}} require sending initial SETTINGS for flow control. As SETTINGS are not accessible for the WebSocket protocol using the existing WebSocket interfaces, a replacement is required.
 
 Therefore client and server MUST send the initial flow control values using CAPSULES
 immediately before ANY other capsules such as WT_STREAM or DATAGRAM capsules have been sent.
@@ -165,7 +165,7 @@ This specification establishes a new IANA registry for WebTransport Protocol Ver
 As part of this registry, IANA manages the following information (similar to {{WEBSOCKET}} versions):
 
    Version String
-      The version string name as part of the subprotocol defined in {{websocket-subprotocol-name-registry}} and {{connection-and-version-negotiation}}.  The value must only include alphanumeric characters.
+      The version string name as part of the subprotocol defined in {{websocket-subprotocol-name-registry}} and {{connection-version-negotiation-and-application-level-protocol}}.  The value must only include alphanumeric characters.
 
    Reference
       The RFC requesting a new version number or a draft name with
