@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-10T00:25:11.516855+00:00",
+  "timestamp": "2025-04-13T00:50:57.600160+00:00",
   "repo": "martenrichter/draft-ietf-webtransport-websocket",
   "labels": [
     {
@@ -50,5 +50,34 @@
     }
   ],
   "issues": [],
-  "pulls": []
+  "pulls": [
+    {
+      "number": 1,
+      "id": "PR_kwDOK_pwHM6SWhz7",
+      "title": "Update references to other specs",
+      "url": "https://github.com/martenrichter/draft-ietf-webtransport-websocket/pull/1",
+      "state": "MERGED",
+      "author": "martenrichter",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-04-12T11:28:37Z",
+      "updatedAt": "2025-04-12T11:34:48Z",
+      "baseRepository": "martenrichter/draft-ietf-webtransport-websocket",
+      "baseRefName": "main",
+      "baseRefOid": "286f70ffefd6d6cd818a0739d3a0b14655995f47",
+      "headRepository": "martenrichter/draft-ietf-webtransport-websocket",
+      "headRefName": "martenrichter-update-versions",
+      "headRefOid": "618e47ab939c75a681c6376934ae01d8a7c7f341",
+      "closedAt": "2025-04-12T11:34:44Z",
+      "mergedAt": "2025-04-12T11:34:44Z",
+      "mergedBy": "martenrichter",
+      "mergeCommit": {
+        "oid": "2aa22f398d1bd2aa60fb546bde6439cfe5bf6414"
+      },
+      "comments": [],
+      "reviews": []
+    }
+  ]
 }
