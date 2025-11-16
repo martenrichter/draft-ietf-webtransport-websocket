@@ -4,8 +4,8 @@
 
 webtrans                                                      M. Richter
 Internet-Draft                             Technische Universität Berlin
-Intended status: Standards Track                             24 May 2025
-Expires: 25 November 2025
+Intended status: Standards Track                        16 November 2025
+Expires: 20 May 2026
 
 
                       WebTransport over WebSocket
@@ -44,7 +44,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 25 November 2025.
+   This Internet-Draft will expire on 20 May 2026.
 
 Copyright Notice
 
@@ -299,11 +299,11 @@ Table of Contents
               <https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-
               semantics-19>.
 
-   [OVERVIEW] Vasiliev, V., "The WebTransport Protocol Framework", Work
-              in Progress, Internet-Draft, draft-ietf-webtrans-overview-
-              09, 25 February 2025,
+   [OVERVIEW] Kinnear, E. and V. Vasiliev, "The WebTransport Protocol
+              Framework", Work in Progress, Internet-Draft, draft-ietf-
+              webtrans-overview-11, 20 October 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-
-              webtrans-overview-09>.
+              webtrans-overview-11>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
